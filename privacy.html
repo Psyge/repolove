@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="privacy.pagetitle">Privacy Policy — Aurora Tracker</title>
+  <meta name="description" content="Privacy policy and terms of service for Aurora Tracker — how we handle data, cookies, analytics and advertising.">
+  <meta property="og:title" content="Privacy Policy — Aurora Tracker">
+  <meta property="og:description" content="How Aurora Tracker handles data, cookies and analytics.">
+  <meta property="og:type" content="article">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=2.3.0">
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="brand">Aurora Tracker</a>
+      <nav>
+        <a href="index.html" data-i18n="nav.home">Home</a>
+        <a href="map.html" data-i18n="nav.map">Map</a>
+        <a href="blog.html" data-i18n="nav.blog">Articles</a>
+        <a href="faq.html" data-i18n="nav.faq">FAQ</a>
+      </nav>
+      <div class="lang-switcher">
+        <button data-set-lang="en">EN</button>
+        <button data-set-lang="fi">FI</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding: var(--space-lg) var(--space-md);">
+    <section class="hero" style="padding: var(--space-lg) 0 var(--space-md);">
+      <h1 data-i18n="privacy.title">Privacy Policy</h1>
+      <p class="tagline" data-i18n="privacy.intro">How Aurora Tracker handles your data, cookies and analytics.</p>
+    </section>
+
+    <section class="faq-list">
+      <details class="faq-item" open>
+        <summary data-i18n="privacy.q.about">About this site</summary>
+        <div class="faq-body">
+          <p data-i18n="privacy.a.about1">Aurora Tracker is a real-time monitoring tool for Northern Lights enthusiasts. Our mission is to provide accurate, easy-to-read space weather data to help users predict and catch the Aurora Borealis.</p>
+          <p data-i18n="privacy.a.about2">Aurora Tracker is committed to protecting your privacy. This policy explains how we handle information and use cookies when you visit our website.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary data-i18n="privacy.q.data">Data collection</summary>
+        <div class="faq-body">
+          <p data-i18n="privacy.a.data1">We do not collect personal information such as names or email addresses directly. We may use analytics services to understand how visitors use the site. These services use cookies to collect anonymous data, such as:</p>
+          <ul>
+            <li data-i18n="privacy.a.data2">Browser type and device info.</li>
+            <li data-i18n="privacy.a.data3">Time spent on the site and pages visited.</li>
+            <li data-i18n="privacy.a.data4">Approximate location (country/city).</li>
+          </ul>
+          <p data-i18n="privacy.a.data5">This data is used solely to improve the user experience and monitor the technical performance of the service.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary data-i18n="privacy.q.ads">Advertising</summary>
+        <div class="faq-body">
+          <ul>
+            <li data-i18n="privacy.a.ads1">Third-party vendors, including Google, may use cookies to serve ads based on a user's prior visits to this website or other websites.</li>
+            <li data-i18n="privacy.a.ads2">These advertising cookies enable Google and its partners to serve ads based on visits to this and other sites on the Internet.</li>
+            <li data-i18n="privacy.a.ads3">You can opt out of personalized advertising via Google Ads Settings.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary data-i18n="privacy.q.cookies">Cookies</summary>
+        <div class="faq-body">
+          <p data-i18n="privacy.a.cookies">You can disable cookies through your browser settings at any time.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary data-i18n="privacy.q.contact">Contact</summary>
+        <div class="faq-body">
+          <p><span data-i18n="privacy.a.contact">If you have any questions about this policy, please contact:</span> <span id="email-paikka"></span></p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary data-i18n="privacy.q.terms">Terms of Service</summary>
+        <div class="faq-body">
+          <p data-i18n="privacy.a.terms1"><strong>Acceptance of Terms.</strong> By accessing and using Aurora Tracker, you agree to be bound by these Terms of Service. If you do not agree, please do not use the service.</p>
+          <p data-i18n="privacy.a.terms2"><strong>Use of Service.</strong> Aurora Tracker is a tool for tracking aurora-related space weather data. You agree to use it only for lawful purposes and in a manner that does not infringe the rights of others.</p>
+          <p data-i18n="privacy.a.terms3"><strong>Disclaimer of Warranties.</strong> The service is provided on an "as is" and "as available" basis. We make no warranties, expressed or implied, regarding the accuracy, reliability, or availability of the data provided.</p>
+          <p data-i18n="privacy.a.terms4"><strong>Limitation of Liability.</strong> Aurora Tracker shall not be liable for any direct, indirect, incidental, or consequential damages resulting from the use or inability to use the service.</p>
+          <p data-i18n="privacy.a.terms5"><strong>Intellectual Property.</strong> All original content, including graphics and website code, is the property of Aurora Tracker and is protected by copyright laws.</p>
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Aurora Tracker</p>
+    <div style="margin-top:8px;">
+      <a href="privacy.html" data-i18n="footer.privacy">Privacy</a> · <a href="faq.html" data-i18n="nav.faq">FAQ</a>
+    </div>
+  </footer>
+
+  <script>
+    // Obfuscated email
+    document.addEventListener('DOMContentLoaded', () => {
+      const user = "info.repotracker";
+      const domain = "gmail.com";
+      const el = document.getElementById("email-paikka");
+      if (el) el.innerHTML = '<a href="mailto:' + user + '@' + domain + '">' + user + '@' + domain + '</a>';
+    });
+  </script>
+  <script src="config.js?v=2.3.0"></script>
+  <script src="js/i18n.js?v=2.3.0"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      window.AuroraI18n.load(window.AuroraI18n.current);
+      document.querySelectorAll('[data-set-lang]').forEach(b => {
+        b.addEventListener('click', () => window.AuroraI18n.load(b.dataset.setLang));
+      });
+    });
+  </script>
+</body>
+</html>
