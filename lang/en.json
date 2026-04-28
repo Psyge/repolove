@@ -1,7 +1,7 @@
 {
   "app.title": "Aurora Tracker — Live Northern Lights Forecast",
   "app.tagline": "Real-time aurora visibility for Lapland",
-  "hero.sub": "Data is updated every 5 minutes",
+  "hero.sub": "Live Kp index, solar wind speed and Bz orientation — refreshed every 5 minutes from NOAA SWPC.",
   "nav.home": "Home",
   "nav.map": "Map",
   "nav.blog": "Articles",
@@ -135,5 +135,15 @@
   "post1.p.field1": "Arrive before dark, find your composition while you can still see, and pre-focus on a distant light. Take a test shot, then leave the camera mostly alone — refocus only if you change focal length. Keep the lens hood on; frost is the enemy. If the front element fogs up, gently warm it with body heat, never breathe on it.",
   "post1.h2.safety": "Stay safe and warm",
   "post1.p.safety1": "Dress in layers, bring hand warmers, and tell someone where you are going. The best photos rarely happen in the parking lot — but never trade a shot for a dangerous detour onto unplowed roads or thin ice. Patience and warm boots win more aurora nights than expensive gear.",
-  "post1.cta": "Check the live forecast tonight — clear skies and Kp 3+ are usually all you need in Lapland."
+  "post1.cta": "Check the live forecast tonight — clear skies and Kp 3+ are usually all you need in Lapland.",
+  "blog.post1.date": "2026-04-28",
+  "blog.post2.title": "Reading the aurora forecast like a pro",
+  "blog.post2.excerpt": "What Kp, Bz, solar wind and OVATION really mean — and how to combine them into a confident go/no-go decision.",
+  "blog.post2.date": "2026-04-20",
+  "blog.post3.title": "Best months and hours for the northern lights",
+  "blog.post3.excerpt": "When to chase the aurora in Lapland — peak months, best hours of the night, moon phase and weather windows.",
+  "blog.post3.date": "2026-04-10",
+  "home.articles.title": "Latest articles",
+  "home.articles.sub": "Tips and guides for aurora hunters.",
+  "home.articles.all": "See all articles →"
 }
