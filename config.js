@@ -6,7 +6,7 @@
  */
 window.AURORA_CONFIG = {
   // --- Versio (cachebusting) ---
-  VERSION: '2.0.0',
+  VERSION: '2.1.1',
 
   // --- Backend ---
   WORKER_URL: 'https://proud-union-1e84.masto84.workers.dev',
@@ -25,7 +25,7 @@ window.AURORA_CONFIG = {
   // --- Nominatim-haku (kaupungit) ---
   NOMINATIM: {
     URL: 'https://nominatim.openstreetmap.org/search',
-    USER_AGENT: 'AuroraTracker/2.0 (contact: info.repotracker@gmail.com)', // PÄIVITÄ
+    USER_AGENT: 'AuroraTracker/2.0 (contact: your-email@example.com)', // PÄIVITÄ
     BBOX: { // Lapland-painotus, mutta haku toimii globaalisti
       north: 71.5, south: 65.0, east: 32.0, west: 19.0,
     },
