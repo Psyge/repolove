@@ -1,7 +1,7 @@
 {
   "app.title": "Aurora Tracker — Live Northern Lights Forecast",
   "app.tagline": "Real-time aurora visibility for Lapland",
-  "hero.sub": "Live Kp index, solar wind speed and Bz orientation — refreshed every 5 minutes from NOAA SWPC.",
+  "hero.sub": "Data is updated every 5 minutes",
   "nav.home": "Home",
   "nav.map": "Map",
   "nav.blog": "Articles",
