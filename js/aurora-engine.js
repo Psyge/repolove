@@ -43,7 +43,7 @@
   }
 
   function calculate(input) {
-    const { kp, speed, density, bz, cloudCover, latitude } = input;
+    const { kp, speed, density, bz, cloudCover, latitude, ovation } = input;
     let score =
         scoreKp(kp)         * 0.35
       + scoreBz(bz)         * 0.25
@@ -52,14 +52,22 @@
       + scoreClouds(cloudCover) * 0.10
       + scoreLatitude(latitude, kp) * 0.05;
 
-    // Kp toimii porttina: ilman geomagneettista aktiivisuutta revontulia ei näy.
-    // Rajoitetaan kokonaisprosentti realistiseksi matalilla Kp-arvoilla.
+    // OVATION-intensiteetti (0–100) kuvaa paikallista revontulipilveä juuri nyt.
+    // Käytetään sitä pilvinäkyvyyden kanssa kerrottuna paikallisena tarkennuksena.
+    let ovationProb = null;
+    if (ovation != null && !isNaN(ovation)) {
+      const cloudVis = cloudCover != null ? (100 - cloudCover) / 100 : 0.7;
+      ovationProb = Math.min(100, (ovation / 50) * 100) * cloudVis;
+      // Käytetään suurempaa kahdesta — paikallinen pilvi voittaa globaalin Kp:n
+      score = Math.max(score, ovationProb);
+    }
+
+    // Kp toimii porttina, mutta vahva paikallinen OVATION saa nostaa kattoa.
     if (kp != null && !isNaN(kp)) {
-      // Maksimi: Kp 0 → 5%, Kp 1 → 15%, Kp 2 → 30%, Kp 3 → 50%, Kp 4+ → ei kattoa
-      const kpCap = kp < 4 ? 5 + kp * 11.25 : 100;
+      let kpCap = kp < 4 ? 5 + kp * 11.25 : 100;
+      if (ovationProb != null) kpCap = Math.max(kpCap, ovationProb);
       score = Math.min(score, kpCap);
-    } else {
-      // Jos Kp puuttuu kokonaan, ei luvata mitään
+    } else if (ovationProb == null) {
       score = 0;
     }
 
