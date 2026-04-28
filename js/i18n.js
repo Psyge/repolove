@@ -8,7 +8,10 @@
 
   async function load(lang) {
     if (!CFG.SUPPORTED_LANGS.includes(lang)) lang = CFG.DEFAULT_LANG;
-    const res = await fetch(`lang/${lang}.json?v=${CFG.VERSION}`);
+    // Resolve lang/ relative to where i18n.js is loaded from, so subfolder pages (e.g. blog/) work too.
+    const scriptEl = document.querySelector('script[src*="i18n.js"]');
+    const base = scriptEl ? scriptEl.src.replace(/js\/i18n\.js.*$/, '') : '';
+    const res = await fetch(`${base}lang/${lang}.json?v=${CFG.VERSION}`);
     translations = await res.json();
     currentLang = lang;
     localStorage.setItem('aurora_lang', lang);
