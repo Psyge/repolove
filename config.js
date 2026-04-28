@@ -6,7 +6,7 @@
  */
 window.AURORA_CONFIG = {
   // --- Versio (cachebusting) ---
-  VERSION: '2.1.1',
+  VERSION: '2.3.0',
 
   // --- Backend ---
   WORKER_URL: 'https://proud-union-1e84.masto84.workers.dev',
