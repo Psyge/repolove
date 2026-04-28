@@ -31,5 +31,9 @@
   "footer.about": "Tietoja",
   "footer.privacy": "Tietosuoja",
   "loading": "Ladataan…",
+  "details.show": "Näytä lisätiedot ▾",
+  "details.hide": "Piilota lisätiedot ▴",
+  "weather.wind": "Tuuli",
+  "map.click_hint": "Klikkaa karttaa nähdäksesi todennäköisyyden",
   "error.fetch": "Tietojen lataus epäonnistui. Yritä myöhemmin uudelleen."
 }
