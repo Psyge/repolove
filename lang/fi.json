@@ -1,7 +1,7 @@
 {
   "app.title": "Revontulitutka — Reaaliaikainen ennuste",
   "app.tagline": "Revontulien näkyvyys Lapissa juuri nyt",
-  "hero.sub": "Live Kp-indeksi, aurinkotuulen nopeus ja Bz — päivittyy 5 minuutin välein NOAA SWPC:stä.",
+  "hero.sub": "Data päivittyy joka 5min",
   "nav.home": "Etusivu",
   "nav.map": "Kartta",
   "nav.blog": "Artikkelit",
