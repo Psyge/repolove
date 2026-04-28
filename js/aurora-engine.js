@@ -44,13 +44,25 @@
 
   function calculate(input) {
     const { kp, speed, density, bz, cloudCover, latitude } = input;
-    const score =
+    let score =
         scoreKp(kp)         * 0.35
       + scoreBz(bz)         * 0.25
       + scoreSpeed(speed)   * 0.15
       + scoreDensity(density) * 0.10
       + scoreClouds(cloudCover) * 0.10
       + scoreLatitude(latitude, kp) * 0.05;
+
+    // Kp toimii porttina: ilman geomagneettista aktiivisuutta revontulia ei näy.
+    // Rajoitetaan kokonaisprosentti realistiseksi matalilla Kp-arvoilla.
+    if (kp != null && !isNaN(kp)) {
+      // Maksimi: Kp 0 → 5%, Kp 1 → 15%, Kp 2 → 30%, Kp 3 → 50%, Kp 4+ → ei kattoa
+      const kpCap = kp < 4 ? 5 + kp * 11.25 : 100;
+      score = Math.min(score, kpCap);
+    } else {
+      // Jos Kp puuttuu kokonaan, ei luvata mitään
+      score = 0;
+    }
+
     const probability = Math.round(score);
     let level = 'low';
     if (probability >= 75) level = 'veryhigh';
