@@ -18,6 +18,19 @@
     maxZoom: 18,
   }).addTo(map);
 
+  // Animoitu NOAA OVATION revontulipilvi
+  const auroraOverlay = window.AuroraOverlay && window.AuroraOverlay.create();
+  if (auroraOverlay) auroraOverlay.addTo(map);
+  async function refreshOvation() {
+    if (!auroraOverlay) return;
+    try {
+      const data = await window.AuroraOverlay.fetch();
+      auroraOverlay.setData(data);
+    } catch (e) { console.warn('[ovation]', e); }
+  }
+  refreshOvation();
+  setInterval(refreshOvation, 5 * 60 * 1000);
+
   // Globaali nykytila
   let solar = { kp: null, speed: null, density: null, bz: null, bt: null };
 
@@ -38,9 +51,10 @@
   }
 
   function buildPopupHtml(name, lat, lon, weather) {
+    const ovation = window.AuroraOverlay ? window.AuroraOverlay.intensityAt(lat, lon) : null;
     const aurora = window.AuroraEngine.calculate({
       kp: solar.kp, speed: solar.speed, density: solar.density,
-      bz: solar.bz, cloudCover: weather?.clouds, latitude: lat,
+      bz: solar.bz, cloudCover: weather?.clouds, latitude: lat, ovation,
     });
     const prob = isNaN(aurora.probability) ? 0 : aurora.probability;
     const color = levelColor(aurora.level);
