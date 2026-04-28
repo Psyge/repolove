@@ -8,60 +8,108 @@
   <meta property="og:title" content="Aurora Tracker">
   <meta property="og:description" content="Live northern lights forecast for Lapland.">
   <meta property="og:type" content="website">
-  <link rel="canonical" href="https://your-domain.example/">
-  <link rel="stylesheet" href="css/style.css?v=2.0.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="css/style.css?v=2.1.0">
 </head>
 <body>
   <header>
-    <h1 data-i18n="app.title">Aurora Tracker</h1>
-    <nav>
-      <a href="/" data-i18n="nav.home">Home</a>
-      <a href="/map.html" data-i18n="nav.map">Map</a>
-      <a href="/faq.html" data-i18n="nav.faq">FAQ</a>
-      <a href="/contact.html" data-i18n="nav.contact">Contact</a>
-    </nav>
-    <div class="lang-switcher">
-      <button data-set-lang="en">🇬🇧 EN</button>
-      <button data-set-lang="fi">🇫🇮 FI</button>
+    <div class="header-inner">
+      <a href="index.html" class="brand">Aurora Tracker</a>
+      <nav>
+        <a href="index.html" data-i18n="nav.home">Home</a>
+        <a href="map.html" data-i18n="nav.map">Map</a>
+        <a href="#info" data-i18n="nav.faq">FAQ</a>
+      </nav>
+      <div class="lang-switcher">
+        <button data-set-lang="en">EN</button>
+        <button data-set-lang="fi">FI</button>
+      </div>
     </div>
   </header>
 
-  <main class="container">
-    <section class="kp-display">
-      <p data-i18n="probability.label">Aurora probability</p>
-      <h2><span data-probability>–</span></h2>
-      <p>
-        <span data-i18n="kp.label">Kp</span>: <span data-kp>–</span> ·
-        <span data-i18n="wind.speed">Wind</span>: <span data-speed>–</span> ·
-        <span data-i18n="bz.label">Bz</span>: <span data-bz>–</span>
-      </p>
-      <p data-error style="color:#ff6666;"></p>
+  <main>
+    <!-- ===== HERO / KP ===== -->
+    <section class="hero">
+      <h1 data-i18n="app.tagline">Real-time aurora visibility for Lapland</h1>
+      <p class="tagline" data-i18n="hero.sub">Live Kp index, solar wind speed and Bz orientation — refreshed every 5 minutes from NOAA SWPC.</p>
+
+      <div class="kp-display">
+        <div class="kp-label" data-i18n="probability.label">Aurora probability</div>
+        <div class="kp-big"><span data-probability>–</span></div>
+        <div class="kp-meta">
+          <span><span data-i18n="kp.label">Kp</span>: <strong data-kp>–</strong></span>
+          <span><span data-i18n="wind.speed">Wind</span>: <strong data-speed>–</strong></span>
+          <span><span data-i18n="bz.label">Bz</span>: <strong data-bz>–</strong></span>
+        </div>
+        <p class="kp-error" data-error></p>
+      </div>
     </section>
 
-    <div class="ad-slot"><!-- AdSense slot 1 --></div>
+    <div class="container ad-slot"><!-- AdSense slot 1 --></div>
 
-    <section>
-      <label for="search-input" data-i18n="search.placeholder">Search a city…</label>
-      <input id="search-input" type="search"
-             data-i18n-attr="placeholder:search.placeholder">
-      <ul id="search-results"></ul>
+    <!-- ===== TOP LOCATIONS ===== -->
+    <section class="block container">
+      <div class="section-head">
+        <div>
+          <h2 data-i18n="locations.title">Top viewing locations</h2>
+          <p data-i18n="locations.sub">Live conditions for popular Lapland spots.</p>
+        </div>
+      </div>
+      <div class="places-grid" id="places-grid">
+        <div style="color:var(--fg-muted);text-align:center;padding:40px;" data-i18n="loading">Loading…</div>
+      </div>
     </section>
 
-    <div class="ad-slot"><!-- AdSense slot 2 --></div>
+    <!-- ===== MAP PREVIEW ===== -->
+    <section class="block container">
+      <div class="section-head">
+        <div>
+          <h2 data-i18n="map.title">Explore the live map</h2>
+          <p data-i18n="map.sub">Click a marker to see local weather and probability.</p>
+        </div>
+      </div>
+      <a href="map.html" style="display:block;">
+        <div class="map-preview" id="map-preview">
+          <div class="map-preview-cta"><span data-i18n="map.open">Open live map →</span></div>
+        </div>
+      </a>
+    </section>
+
+    <div class="container ad-slot"><!-- AdSense slot 2 --></div>
+
+    <!-- ===== SEARCH ===== -->
+    <section class="block container" id="info">
+      <div class="section-head">
+        <div>
+          <h2 data-i18n="search.title">Search any city</h2>
+          <p data-i18n="search.sub">Powered by OpenStreetMap Nominatim.</p>
+        </div>
+      </div>
+      <div class="search-box">
+        <input id="search-input" type="search" data-i18n-attr="placeholder:search.placeholder" placeholder="Search a city…">
+        <ul id="search-results"></ul>
+      </div>
+    </section>
   </main>
 
   <footer>
-    <a href="/privacy.html" data-i18n="footer.privacy">Privacy</a> ·
-    <a href="/about.html" data-i18n="footer.about">About</a>
+    <p>© 2026 Aurora Tracker</p>
+    <div style="margin-top:8px;">
+      <a href="#">Privacy</a> · <a href="#">About</a>
+    </div>
   </footer>
 
-  <!-- ===== Skriptit (järjestys tärkeä) ===== -->
-  <script src="config.js?v=2.0.0"></script>
-  <script src="js/i18n.js?v=2.0.0"></script>
-  <script src="js/solar-wind.js?v=2.0.0"></script>
-  <script src="js/aurora-engine.js?v=2.0.0"></script>
-  <script src="js/search.js?v=2.0.0"></script>
-  <script src="js/markers.js?v=2.0.0"></script>
-  <script src="js/main.js?v=2.0.0"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="config.js?v=2.1.0"></script>
+  <script src="js/i18n.js?v=2.1.0"></script>
+  <script src="js/places.js?v=2.1.0"></script>
+  <script src="js/weather.js?v=2.1.0"></script>
+  <script src="js/solar-wind.js?v=2.1.0"></script>
+  <script src="js/aurora-engine.js?v=2.1.0"></script>
+  <script src="js/search.js?v=2.1.0"></script>
+  <script src="js/main.js?v=2.1.0"></script>
 </body>
 </html>
