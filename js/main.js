@@ -26,10 +26,10 @@
         bz: data.bz, latitude: 67,
       });
       const set = (sel, val) => document.querySelectorAll(sel).forEach(el => el.textContent = val);
-      set('[data-kp]',          data.kp != null ? data.kp.toFixed(1) : '–');
-      set('[data-speed]',       data.speed ? `${data.speed.toFixed(0)} km/s` : '–');
-      set('[data-bz]',          data.bz != null ? `${data.bz.toFixed(1)} nT` : '–');
-      set('[data-probability]', `${aurora.probability}%`);
+      set('[data-kp]',          (data.kp != null && !isNaN(data.kp)) ? data.kp.toFixed(1) : '0');
+      set('[data-speed]',       (data.speed && !isNaN(data.speed)) ? `${data.speed.toFixed(0)} km/s` : '0 km/s');
+      set('[data-bz]',          (data.bz != null && !isNaN(data.bz)) ? `${data.bz.toFixed(1)} nT` : '0 nT');
+      set('[data-probability]', `${isNaN(aurora.probability) ? 0 : aurora.probability}%`);
       document.body.dataset.auroraLevel = aurora.level;
       // päivitä myös kohderivien KP-arvot
       updateRowKp();
@@ -47,7 +47,8 @@
   }
   function updateRowKp() {
     document.querySelectorAll('.place-row .kp-val').forEach(el => {
-      el.textContent = currentKp != null ? currentKp.toFixed(1) : '–';
+      const val = (currentKp != null && !isNaN(currentKp)) ? currentKp.toFixed(1) : '0';
+      el.textContent = val;
       el.className = `value kp-val ${kpClass(currentKp)}`;
     });
   }
