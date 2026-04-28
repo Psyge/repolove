@@ -345,3 +345,7 @@ footer a { color: var(--fg-muted); margin: 0 var(--space-sm); }
   background: var(--surface);
   border-radius: 0 var(--radius) var(--radius) 0;
 }
+
+/* Aurora oval overlay (NOAA OVATION) */
+.leaflet-aurora-layer { position: absolute; left: 0; top: 0; pointer-events: none; will-change: transform; }
+.aurora-canvas { position: absolute; left: 0; top: 0; pointer-events: none; mix-blend-mode: screen; }
