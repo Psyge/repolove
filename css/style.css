@@ -1,0 +1,111 @@
+/* ==========================================================
+   Aurora Tracker v2 — Stylesheet
+   Värit määritelty CSS-muuttujina yhdessä paikassa.
+   ========================================================== */
+:root {
+  --bg:           #0a0a0f;
+  --bg-elevated:  #14141c;
+  --fg:           #f0f0f5;
+  --fg-muted:     #8888a0;
+  --accent:       #00ffcc;
+  --accent-glow:  0 0 20px rgba(0, 255, 204, 0.4);
+  --border:       #2a2a3a;
+  --radius:       8px;
+  --space-xs: 4px; --space-sm: 8px; --space-md: 16px;
+  --space-lg: 24px; --space-xl: 48px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-shadow: var(--accent-glow); }
+
+/* --- Layout --- */
+.container { max-width: 1200px; margin: 0 auto; padding: var(--space-md); }
+
+header {
+  background: var(--bg-elevated);
+  border-bottom: 1px solid var(--border);
+  padding: var(--space-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav a { margin-right: var(--space-md); }
+
+/* --- Probability indicator --- */
+[data-aurora-level="low"]      { --indicator: #4a4a5a; }
+[data-aurora-level="medium"]   { --indicator: #ffcc00; }
+[data-aurora-level="high"]     { --indicator: #00ff88; }
+[data-aurora-level="veryhigh"] { --indicator: #00ffcc; }
+
+.kp-display {
+  background: var(--bg-elevated);
+  border: 2px solid var(--indicator, var(--border));
+  border-radius: var(--radius);
+  padding: var(--space-lg);
+  text-align: center;
+  box-shadow: 0 0 30px color-mix(in srgb, var(--indicator, transparent) 30%, transparent);
+}
+
+/* --- Search --- */
+#search-results {
+  list-style: none;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.search-result {
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  border-bottom: 1px solid var(--border);
+}
+.search-result:hover { background: var(--accent); color: var(--bg); }
+.search-result:last-child { border-bottom: none; }
+
+/* --- Language switcher --- */
+.lang-switcher button {
+  background: transparent;
+  color: var(--fg-muted);
+  border: 1px solid var(--border);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 14px;
+}
+.lang-switcher button:hover { color: var(--accent); border-color: var(--accent); }
+
+/* --- Mainosslotit: piilota kun tyhjä (kohta 8) --- */
+.ad-slot:empty { display: none; }
+.ad-slot {
+  background: var(--bg-elevated);
+  border: 1px dashed var(--border);
+  margin: var(--space-lg) 0;
+  min-height: 90px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--fg-muted);
+}
+
+/* --- Footer --- */
+footer {
+  border-top: 1px solid var(--border);
+  padding: var(--space-lg);
+  text-align: center;
+  color: var(--fg-muted);
+  margin-top: var(--space-xl);
+}
+
+/* --- Responsive --- */
+@media (max-width: 640px) {
+  header { flex-direction: column; gap: var(--space-sm); }
+  nav a { margin: 0 var(--space-sm); }
+}
