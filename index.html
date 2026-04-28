@@ -50,13 +50,17 @@
 
     <div class="container ad-slot"><!-- AdSense slot 1 --></div>
 
-    <!-- ===== TOP LOCATIONS ===== -->
+    <!-- ===== TOP LOCATIONS + SEARCH ===== -->
     <section class="block container">
       <div class="section-head">
         <div>
           <h2 data-i18n="locations.title">Top viewing locations</h2>
           <p data-i18n="locations.sub">Live conditions for popular Lapland spots.</p>
         </div>
+      </div>
+      <div class="search-box" style="margin-bottom: var(--space-md);">
+        <input id="search-input" type="search" data-i18n-attr="placeholder:search.placeholder" placeholder="Search any city…">
+        <ul id="search-results"></ul>
       </div>
       <div class="places-grid" id="places-grid">
         <div style="color:var(--fg-muted);text-align:center;padding:40px;" data-i18n="loading">Loading…</div>
@@ -79,20 +83,6 @@
     </section>
 
     <div class="container ad-slot"><!-- AdSense slot 2 --></div>
-
-    <!-- ===== SEARCH ===== -->
-    <section class="block container" id="info">
-      <div class="section-head">
-        <div>
-          <h2 data-i18n="search.title">Search any city</h2>
-          <p data-i18n="search.sub">Powered by OpenStreetMap Nominatim.</p>
-        </div>
-      </div>
-      <div class="search-box">
-        <input id="search-input" type="search" data-i18n-attr="placeholder:search.placeholder" placeholder="Search a city…">
-        <ul id="search-results"></ul>
-      </div>
-    </section>
   </main>
 
   <footer>
