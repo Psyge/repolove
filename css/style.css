@@ -230,6 +230,7 @@ section.block { padding: var(--space-xl) var(--space-md); }
 .aurora-popup .ap-toggle { margin-top: 10px; background: transparent; color: var(--accent); border: 1px solid var(--border); border-radius: 999px; padding: 6px 14px; font-size: 12px; font-weight: 600; cursor: pointer; transition: all .15s; }
 .aurora-popup .ap-toggle:hover { background: var(--accent); color: var(--bg); border-color: var(--accent); }
 .aurora-popup .ap-details { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--border); display: grid; gap: 6px; text-align: left; }
+.aurora-popup .ap-details[hidden] { display: none !important; }
 .aurora-popup .ap-details > div { display: flex; justify-content: space-between; font-size: 12px; color: var(--fg-muted); }
 .aurora-popup .ap-details strong { color: var(--fg); font-family: var(--font-display); font-weight: 600; }
 .aurora-popup .ap-desc { text-align: center; font-style: italic; color: var(--fg-dim); }
