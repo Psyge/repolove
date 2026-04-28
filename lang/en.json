@@ -31,5 +31,9 @@
   "footer.about": "About",
   "footer.privacy": "Privacy",
   "loading": "Loading…",
+  "details.show": "Show details ▾",
+  "details.hide": "Hide details ▴",
+  "weather.wind": "Wind",
+  "map.click_hint": "Click anywhere on the map to see aurora probability",
   "error.fetch": "Could not load data. Try again later."
 }
