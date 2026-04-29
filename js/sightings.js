@@ -9,6 +9,7 @@
 
   let turnstileWidgetId = null;
   let pendingResolve = null;
+  let tokenPromise = null;
 
   // Globaali callback Turnstilelle
   window.__auroraTurnstileCb = function (token) {
@@ -31,44 +32,52 @@
     turnstileWidgetId = window.turnstile.render(host, {
       sitekey: SITE_KEY,
       size: 'invisible',
-      callback: '__auroraTurnstileCb',
-      'error-callback': '__auroraTurnstileErr',
+      execution: 'execute',
+      appearance: 'execute',
+      callback: window.__auroraTurnstileCb,
+      'error-callback': window.__auroraTurnstileErr,
+      'expired-callback': window.__auroraTurnstileErr,
+      'timeout-callback': window.__auroraTurnstileErr,
     });
   }
 
   function getToken() {
-    return new Promise((resolve) => {
-      if (!window.turnstile || !SITE_KEY) return resolve(null);
+    if (tokenPromise) return tokenPromise;
+
+    tokenPromise = new Promise((resolve) => {
+      const finish = (token) => {
+        tokenPromise = null;
+        resolve(token);
+      };
+
+      if (!window.turnstile || !SITE_KEY) return finish(null);
       ensureWidget();
-      if (turnstileWidgetId === null) return resolve(null);
+      if (turnstileWidgetId === null) return finish(null);
 
-      // Jos edellinen suoritus on kesken, peru se ja resetoi widget
-      if (pendingResolve) {
-        try { pendingResolve(null); } catch {}
-        pendingResolve = null;
-        try { window.turnstile.reset(turnstileWidgetId); } catch {}
-      }
+      pendingResolve = finish;
+      try { window.turnstile.reset(turnstileWidgetId); } catch {}
 
-      pendingResolve = resolve;
-      // Pieni viive jotta reset ehtii viimeistellä
+      // Pieni viive jotta reset ehtii viimeistellä ennen executea
       setTimeout(() => {
         try {
           window.turnstile.execute(turnstileWidgetId);
         } catch (e) {
           console.warn('turnstile execute', e);
-          if (pendingResolve === resolve) { pendingResolve = null; resolve(null); }
+          if (pendingResolve === finish) { pendingResolve = null; finish(null); }
         }
-      }, 50);
+      }, 80);
 
       // failsafe timeout
       setTimeout(() => {
-        if (pendingResolve === resolve) {
+        if (pendingResolve === finish) {
           pendingResolve = null;
           try { window.turnstile.reset(turnstileWidgetId); } catch {}
-          resolve(null);
+          finish(null);
         }
       }, 15000);
     });
+
+    return tokenPromise;
   }
 
   function getPosition() {
