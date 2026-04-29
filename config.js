@@ -10,7 +10,7 @@ window.AURORA_CONFIG = {
 
   // --- Backend ---
   // Sää-Worker (vanha)
-  WORKER_URL: 'https://proud-union-1e84.masto84.workers.dev',
+  WORKER_URL: 'https://report.masto84.workers.dev',
   // Crowdsource-Worker (report). Jos sama Worker hoitaa molemmat, laita tähän sama URL.
   REPORT_WORKER_URL: 'https://report.masto84.workers.dev',
 
