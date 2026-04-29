@@ -12,7 +12,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="css/style.css?v=2.4.0">
+  <link rel="stylesheet" href="css/style.css?v=2.5.0">
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
   <header>
@@ -78,6 +79,20 @@
       </div>
     </section>
 
+    <!-- ===== CROWDSOURCE: LIVE SIGHTINGS ===== -->
+    <section class="block container">
+      <div class="section-head">
+        <div>
+          <h2 data-i18n="sightings.title">Live sightings</h2>
+          <p data-i18n="sightings.sub">Reported by other aurora hunters in the last hour.</p>
+        </div>
+        <button id="report-sighting-btn" class="btn-primary" data-i18n="sightings.report_btn">I see auroras now</button>
+      </div>
+      <div id="sightings-list" class="sightings-list">
+        <div class="sightings-empty" data-i18n="sightings.loading">Loading sightings…</div>
+      </div>
+    </section>
+
     <!-- ===== LATEST ARTICLES ===== -->
     <section class="block container">
       <div class="section-head">
@@ -126,7 +141,8 @@
   <script src="js/weather.js?v=2.4.0"></script>
   <script src="js/solar-wind.js?v=2.4.0"></script>
   <script src="js/aurora-engine.js?v=2.4.0"></script>
-  <script src="js/search.js?v=2.4.0"></script>
-  <script src="js/main.js?v=2.4.0"></script>
+  <script src="js/search.js?v=2.5.0"></script>
+  <script src="js/sightings.js?v=2.5.0"></script>
+  <script src="js/main.js?v=2.5.0"></script>
 </body>
 </html>
