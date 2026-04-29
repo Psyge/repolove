@@ -40,11 +40,34 @@
     return new Promise((resolve) => {
       if (!window.turnstile || !SITE_KEY) return resolve(null);
       ensureWidget();
+      if (turnstileWidgetId === null) return resolve(null);
+
+      // Jos edellinen suoritus on kesken, peru se ja resetoi widget
+      if (pendingResolve) {
+        try { pendingResolve(null); } catch {}
+        pendingResolve = null;
+        try { window.turnstile.reset(turnstileWidgetId); } catch {}
+      }
+
       pendingResolve = resolve;
-      try { window.turnstile.execute(turnstileWidgetId); }
-      catch (e) { console.warn('turnstile execute', e); resolve(null); }
+      // Pieni viive jotta reset ehtii viimeistellä
+      setTimeout(() => {
+        try {
+          window.turnstile.execute(turnstileWidgetId);
+        } catch (e) {
+          console.warn('turnstile execute', e);
+          if (pendingResolve === resolve) { pendingResolve = null; resolve(null); }
+        }
+      }, 50);
+
       // failsafe timeout
-      setTimeout(() => { if (pendingResolve) { pendingResolve(null); pendingResolve = null; } }, 15000);
+      setTimeout(() => {
+        if (pendingResolve === resolve) {
+          pendingResolve = null;
+          try { window.turnstile.reset(turnstileWidgetId); } catch {}
+          resolve(null);
+        }
+      }, 15000);
     });
   }
 
