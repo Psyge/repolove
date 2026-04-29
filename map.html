@@ -9,7 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="css/style.css?v=2.4.0">
+  <link rel="stylesheet" href="css/style.css?v=2.5.0">
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
   <header>
@@ -40,16 +41,20 @@
       </div>
     </div>
     <div id="map"></div>
+
+    <!-- Kelluva raportointinappi -->
+    <button id="report-sighting-btn" class="btn-primary btn-report btn-report-floating" data-i18n="sightings.report_btn">I see auroras now</button>
   </main>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="config.js?v=2.4.0"></script>
-  <script src="js/i18n.js?v=2.4.0"></script>
-  <script src="js/places.js?v=2.4.0"></script>
-  <script src="js/weather.js?v=2.4.0"></script>
-  <script src="js/solar-wind.js?v=2.4.0"></script>
-  <script src="js/aurora-engine.js?v=2.4.0"></script>
-  <script src="js/aurora-overlay.js?v=2.4.0"></script>
-  <script src="js/map-page.js?v=2.4.0"></script>
+  <script src="config.js?v=2.5.0"></script>
+  <script src="js/i18n.js?v=2.5.0"></script>
+  <script src="js/places.js?v=2.5.0"></script>
+  <script src="js/weather.js?v=2.5.0"></script>
+  <script src="js/solar-wind.js?v=2.5.0"></script>
+  <script src="js/aurora-engine.js?v=2.5.0"></script>
+  <script src="js/aurora-overlay.js?v=2.5.0"></script>
+  <script src="js/sightings.js?v=2.5.0"></script>
+  <script src="js/map-page.js?v=2.5.0"></script>
 </body>
 </html>
