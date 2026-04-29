@@ -6,10 +6,16 @@
  */
 window.AURORA_CONFIG = {
   // --- Versio (cachebusting) ---
-  VERSION: '2.3.0',
+  VERSION: '2.4.0',
 
   // --- Backend ---
+  // Sää-Worker (vanha)
   WORKER_URL: 'https://proud-union-1e84.masto84.workers.dev',
+  // Crowdsource-Worker (report). Jos sama Worker hoitaa molemmat, laita tähän sama URL.
+  REPORT_WORKER_URL: 'https://report.masto84.workers.dev',
+
+  // --- Cloudflare Turnstile (julkinen Site Key — OK koodissa) ---
+  TURNSTILE_SITE_KEY: '0x4AAAAAADF29-_iSqwRQWf2',
 
   // --- NOAA-data (ei avainta tarvita) ---
   NOAA: {
