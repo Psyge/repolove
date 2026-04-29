@@ -160,4 +160,41 @@
   }
   refreshSolar(true);
   setInterval(() => refreshSolar(false), CFG.REFRESH_INTERVAL);
+
+  // ---------- Crowdsource sightings -kerros ----------
+  const sightingsLayer = L.layerGroup().addTo(map);
+  const BASE = CFG.REPORT_WORKER_URL || CFG.WORKER_URL;
+
+  async function refreshSightings() {
+    try {
+      const res = await fetch(`${BASE}/api/sightings/clusters`, { cache: 'no-cache' });
+      if (!res.ok) return;
+      const data = await res.json();
+      sightingsLayer.clearLayers();
+      (data.clusters || []).forEach((c) => {
+        if (c.lat == null || c.lon == null) return;
+        const radius = Math.min(8 + c.count * 2, 24);
+        const marker = L.circleMarker([c.lat, c.lon], {
+          radius,
+          color: '#ff3366',
+          weight: 2,
+          fillColor: '#ff3366',
+          fillOpacity: 0.55,
+          className: 'sighting-pulse',
+        });
+        const t = (k, f) => window.AuroraI18n?.t(k, f) ?? f;
+        marker.bindPopup(
+          `<div class="aurora-popup">
+             <div class="ap-name">📍 ${c.region || ''}</div>
+             <div class="ap-prob" style="color:#ff3366">${c.count}</div>
+             <div class="ap-level">${t('sightings.reports','reports')} · ${c.minutesAgo} min</div>
+           </div>`
+        );
+        sightingsLayer.addLayer(marker);
+      });
+    } catch (e) { console.warn('[sightings]', e); }
+  }
+  refreshSightings();
+  setInterval(refreshSightings, 2 * 60 * 1000);
+  window.__refreshSightings = refreshSightings;
 })();
