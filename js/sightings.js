@@ -111,6 +111,7 @@
       if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
       alert(t('sightings.thanks', 'Thanks! Your sighting was reported.') + (data.region ? ` (${data.region})` : ''));
       loadClusters();
+      if (typeof window.__refreshSightings === 'function') window.__refreshSightings();
     } catch (e) {
       console.error('[report]', e);
       alert(t('sightings.error', 'Could not send report. Try again later.'));
