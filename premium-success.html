@@ -34,7 +34,8 @@
   function show(html) { root.innerHTML = html; }
 
   function showSuccess(data) {
-    const days = Math.ceil((data.expiresAt - Date.now()) / 86400000);
+    // Käytä round + max(1) jotta selaimen ja serverin pieni kelloero ei aiheuta +1 päivän virhettä
+    const days = Math.max(1, Math.round((data.expiresAt - Date.now()) / 86400000));
     show(`
       <div style="font-size:64px;margin-bottom:16px">✨</div>
       <h1 style="font-family:var(--font-display);background:var(--gradient-aurora);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Premium activated!</h1>
