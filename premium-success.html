@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Activating Premium…</title>
+<link rel="stylesheet" href="css/style.css?v=2.5.0" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" />
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="brand">🌌 Aurora Tracker</a>
+  </div>
+</header>
+
+<main class="container" style="padding:64px 16px;max-width:560px;text-align:center">
+  <div id="activation-state">
+    <div style="font-size:48px;margin-bottom:16px">⏳</div>
+    <h1 style="font-family:var(--font-display)">Activating your Premium…</h1>
+    <p style="color:var(--fg-muted);margin-top:12px">This usually takes a few seconds.</p>
+  </div>
+</main>
+
+<script src="config.js?v=2.5.0"></script>
+<script src="js/premium.js?v=2.5.0"></script>
+<script>
+(async function () {
+  const root = document.getElementById('activation-state');
+  const params = new URLSearchParams(location.search);
+  let token = params.get('token');
+  const sessionId = params.get('session_id');
+
+  function show(html) { root.innerHTML = html; }
+
+  function showSuccess(data) {
+    const days = Math.ceil((data.expiresAt - Date.now()) / 86400000);
+    show(`
+      <div style="font-size:64px;margin-bottom:16px">✨</div>
+      <h1 style="font-family:var(--font-display);background:var(--gradient-aurora);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Premium activated!</h1>
+      <p style="color:var(--fg-muted);margin:16px 0 32px">You have <strong style="color:var(--accent)">${days} day${days===1?'':'s'}</strong> of full access on this device.</p>
+      <p style="color:var(--fg-muted);font-size:14px">An activation link has also been sent to your email — bookmark it to use this purchase on up to 2 more devices.</p>
+      <p style="margin-top:32px"><a href="map.html" class="cta-btn">Open the map →</a></p>
+    `);
+  }
+
+  function showError(msg, hint) {
+    show(`
+      <div style="font-size:48px;margin-bottom:16px">⚠️</div>
+      <h1 style="font-family:var(--font-display)">${msg}</h1>
+      ${hint ? `<p style="color:var(--fg-muted);margin-top:12px">${hint}</p>` : ''}
+      <p style="margin-top:24px"><a href="premium.html" style="color:var(--accent)">Back to Premium →</a></p>
+    `);
+  }
+
+  try {
+    // Jos session_id mukana mutta token puuttuu — pollaa workeria
+    if (!token && sessionId) {
+      try {
+        token = await window.AuroraPremium.bySession(sessionId);
+      } catch (e) {
+        return showError('Payment is processing…', 'Please wait a moment and refresh this page. The activation link will also arrive in your email.');
+      }
+    }
+    if (!token) return showError('Missing activation token', 'Check your email for the activation link.');
+
+    const data = await window.AuroraPremium.activate(token);
+    showSuccess(data);
+  } catch (e) {
+    if (e.status === 403) {
+      showError('Device limit reached', 'This premium pass has already been activated on 3 devices. To use it on this device, deactivate one of your other devices first (clear premium in localStorage on that device).');
+    } else if (e.status === 410) {
+      showError('This pass has expired', 'Purchase a new one to continue.');
+    } else {
+      showError('Activation failed', e.message || 'Try again or contact support.');
+    }
+  }
+})();
+</script>
+</body>
+</html>
