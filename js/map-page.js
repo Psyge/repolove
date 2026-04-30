@@ -59,6 +59,32 @@
     const prob = isNaN(aurora.probability) ? 0 : aurora.probability;
     const color = levelColor(aurora.level);
     const t = (k, f) => window.AuroraI18n.t(k, f);
+    const isPremium = window.AuroraPremium && window.AuroraPremium.isActive();
+
+    if (!isPremium) {
+      // Ei-premium: vain Kp näkyy, muu blurrattu + osta-CTA
+      return `
+        <div class="aurora-popup">
+          <div class="ap-name">${name}</div>
+          <div class="ap-kp-only">
+            <div class="ap-kp-label">${t('kp.label','Kp')}</div>
+            <div class="ap-kp-value">${fmt(solar.kp)}</div>
+          </div>
+          <div class="ap-locked">
+            <div class="ap-locked-blur">
+              <div class="ap-prob" style="color:${color}">${prob}%</div>
+              <div class="ap-level" style="color:${color}">${levelLabel(aurora.level)}</div>
+              <div class="ap-quick">
+                <div><span>${t('row.clouds','Clouds')}</span><strong>${weather?.clouds ?? 0}%</strong></div>
+                <div><span>${t('row.temp','Temp')}</span><strong>${weather ? weather.temp + '°C' : '–'}</strong></div>
+                <div><span>${t('wind.speed','Solar wind')}</span><strong>${fmt(solar.speed,' km/s',0)}</strong></div>
+              </div>
+            </div>
+            <a class="ap-unlock" href="premium.html">🔒 Unlock full forecast — from 2,99 €</a>
+          </div>
+        </div>
+      `;
+    }
 
     return `
       <div class="aurora-popup">
