@@ -59,7 +59,14 @@
     try {
       const all = await window.AuroraPlaces.load();
       // Näytetään 4 ekaa (voit muuttaa)
-      const shown = all.slice(0, 4);
+      // 1. Sekoitetaan lista (Fisher-Yates shuffle -tekniikka)
+const shuffled = [...all].sort(() => 0.5 - Math.random());
+
+// 2. Arvotaan näytettävä määrä (3 tai 4)
+const count = Math.floor(Math.random() * 2) + 3; 
+
+// 3. Otetaan arvottu määrä paikkoja
+const shown = shuffled.slice(0, count);
       grid.innerHTML = '';
       shown.forEach((p) => {
         const row = document.createElement('div');
