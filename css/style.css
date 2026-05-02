@@ -112,7 +112,18 @@ nav a:hover { color: var(--fg); }
   .hero-grid { grid-template-columns: 1fr; }
   .map-preview-link .map-preview { min-height: 240px; }
 }
+.hero-split::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(0,255,180,0.08), transparent 60%);
+  animation: auroraMove 8s ease-in-out infinite alternate;
+}
 
+@keyframes auroraMove {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(30px); }
+}
 /* Home articles row: 3 columns on desktop, scales down */
 .home-articles {
   display: grid;
