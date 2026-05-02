@@ -50,34 +50,50 @@
     })[level] || 'var(--fg-muted)';
   }
 
-  function buildPopupHtml(name, lat, lon, weather) {
-    const ovation = window.AuroraOverlay ? window.AuroraOverlay.intensityAt(lat, lon) : null;
-    const aurora = window.AuroraEngine.calculate({
-      kp: solar.kp, speed: solar.speed, density: solar.density,
-      bz: solar.bz, cloudCover: weather?.clouds, latitude: lat, ovation,
-    });
-    const prob = isNaN(aurora.probability) ? 0 : aurora.probability;
-    const color = levelColor(aurora.level);
-    const t = (k, f) => window.AuroraI18n.t(k, f);
-    const isPremium = window.AuroraPremium && window.AuroraPremium.isActive();
+  const BASE = CFG.REPORT_WORKER_URL || CFG.WORKER_URL;
 
-    if (!isPremium) {
-      // Ei-premium: vain Kp näkyy, muu blurrattu + osta-CTA
+  async function fetchAuroraData(lat, lon) {
+    const p = window.AuroraPremium && window.AuroraPremium.read();
+    const deviceKey = p?.deviceKey || '';
+    try {
+      const res = await fetch(`${BASE}/api/aurora/calc`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ lat, lon, deviceKey }),
+      });
+      if (!res.ok) throw new Error(`calc ${res.status}`);
+      return await res.json();
+    } catch (e) {
+      console.warn('[aurora calc] failed', e);
+      return null;
+    }
+  }
+
+  function buildPopupHtml(name, data) {
+    const t = (k, f) => window.AuroraI18n.t(k, f);
+    if (!data) {
+      return `<div class="aurora-popup"><div class="ap-name">${name}</div><div class="ap-loading">${t('error.fetch','Failed to load data')}</div></div>`;
+    }
+
+    if (data.tier !== 'premium') {
+      // FREE: serveri ei lähetä probabilityä eikä Bz/speed/density-arvoja.
+      // Mitään premium-tietoa ei ole DOMissa — ei voi paljastaa devtoolsista.
+      const color = levelColor(data.level);
       return `
         <div class="aurora-popup">
           <div class="ap-name">${name}</div>
           <div class="ap-kp-only">
             <div class="ap-kp-label">${t('kp.label','Kp')}</div>
-            <div class="ap-kp-value">${fmt(solar.kp)}</div>
+            <div class="ap-kp-value">${fmt(data.kp)}</div>
           </div>
+          <div class="ap-level" style="color:${color}">${levelLabel(data.level)}</div>
           <div class="ap-locked">
-            <div class="ap-locked-blur">
-              <div class="ap-prob" style="color:${color}">${prob}%</div>
-              <div class="ap-level" style="color:${color}">${levelLabel(aurora.level)}</div>
+            <div class="ap-locked-teaser">
+              <div class="ap-prob">🔒 — %</div>
               <div class="ap-quick">
-                <div><span>${t('row.clouds','Clouds')}</span><strong>${weather?.clouds ?? 0}%</strong></div>
-                <div><span>${t('row.temp','Temp')}</span><strong>${weather ? weather.temp + '°C' : '–'}</strong></div>
-                <div><span>${t('wind.speed','Solar wind')}</span><strong>${fmt(solar.speed,' km/s',0)}</strong></div>
+                <div><span>${t('row.clouds','Clouds')}</span><strong>${data.clouds ?? '–'}%</strong></div>
+                <div><span>${t('wind.speed','Solar wind')}</span><strong>🔒</strong></div>
+                <div><span>${t('bz.label','Bz')}</span><strong>🔒</strong></div>
               </div>
             </div>
             <a class="ap-unlock" href="premium.html">🔒 Unlock full forecast — from 2,99 €</a>
@@ -86,23 +102,25 @@
       `;
     }
 
+    // PREMIUM
+    const color = levelColor(data.level);
     return `
       <div class="aurora-popup">
         <div class="ap-name">${name}</div>
-        <div class="ap-prob" style="color:${color}">${prob}%</div>
-        <div class="ap-level" style="color:${color}">${levelLabel(aurora.level)}</div>
+        <div class="ap-prob" style="color:${color}">${data.probability}%</div>
+        <div class="ap-level" style="color:${color}">${levelLabel(data.level)}</div>
         <div class="ap-quick">
-          <div><span>${t('kp.label','Kp')}</span><strong>${fmt(solar.kp)}</strong></div>
-          <div><span>${t('row.clouds','Clouds')}</span><strong>${weather?.clouds ?? 0}%</strong></div>
-          <div><span>${t('row.temp','Temp')}</span><strong>${weather ? weather.temp + '°C' : '–'}</strong></div>
+          <div><span>${t('kp.label','Kp')}</span><strong>${fmt(data.kp)}</strong></div>
+          <div><span>${t('row.clouds','Clouds')}${data.cloudSource === 'fmi' ? ' <small style="opacity:.6">(FMI)</small>' : ''}</span><strong>${data.clouds ?? 0}%</strong></div>
+          <div><span>${t('row.temp','Temp')}</span><strong>${data.temp != null ? data.temp + '°C' : '–'}</strong></div>
         </div>
         <button class="ap-toggle" type="button">${t('details.show','Show details ▾')}</button>
         <div class="ap-details" hidden>
-          <div><span>${t('wind.speed','Solar wind')}</span><strong>${fmt(solar.speed, ' km/s', 0)}</strong></div>
-          <div><span>${t('bz.label','Bz')}</span><strong>${fmt(solar.bz, ' nT')}</strong></div>
-          <div><span>${t('wind.density','Density')}</span><strong>${fmt(solar.density, ' p/cm³')}</strong></div>
-          ${weather ? `<div><span>${t('weather.wind','Wind')}</span><strong>${weather.wind} m/s</strong></div>` : ''}
-          ${weather?.desc ? `<div class="ap-desc">${weather.desc}</div>` : ''}
+          <div><span>${t('wind.speed','Solar wind')}</span><strong>${fmt(data.speed, ' km/s', 0)}</strong></div>
+          <div><span>${t('bz.label','Bz')}</span><strong>${fmt(data.bz, ' nT')}</strong></div>
+          <div><span>${t('wind.density','Density')}</span><strong>${fmt(data.density, ' p/cm³')}</strong></div>
+          ${data.windMs != null ? `<div><span>${t('weather.wind','Wind')}</span><strong>${data.windMs} m/s</strong></div>` : ''}
+          ${data.weatherDesc ? `<div class="ap-desc">${data.weatherDesc}</div>` : ''}
         </div>
       </div>
     `;
@@ -124,14 +142,13 @@
 
   async function openAuroraPopup(lat, lon, name) {
     const placeName = name || `${lat.toFixed(2)}, ${lon.toFixed(2)}`;
-    // Loading-popup
     const loading = L.popup({ maxWidth: 320 })
       .setLatLng([lat, lon])
       .setContent(`<div class="aurora-popup"><div class="ap-name">${placeName}</div><div class="ap-loading">${window.AuroraI18n.t('loading','Loading…')}</div></div>`)
       .openOn(map);
 
-    const weather = await window.AuroraWeather.getWeather(lat, lon).catch(() => null);
-    loading.setContent(buildPopupHtml(placeName, lat, lon, weather));
+    const data = await fetchAuroraData(lat, lon);
+    loading.setContent(buildPopupHtml(placeName, data));
     setTimeout(() => wirePopup(loading), 0);
   }
 
@@ -166,9 +183,15 @@
       const aurora = window.AuroraEngine.calculate({
         kp: data.kp, speed: data.speed, density: data.density, bz: data.bz, latitude: 67,
       });
+      const isPremium = window.AuroraPremium && window.AuroraPremium.isActive();
       const set = (sel, val) => document.querySelectorAll(sel).forEach(el => el.textContent = val);
       set('[data-kp]', (data.kp != null && !isNaN(data.kp)) ? data.kp.toFixed(1) : '0');
-      set('[data-probability]', `${isNaN(aurora.probability) ? 0 : aurora.probability}%`);
+      // Probability vain premiumille — ei-premiumille näytetään level-teksti, ei tarkkaa %
+      if (isPremium) {
+        set('[data-probability]', `${isNaN(aurora.probability) ? 0 : aurora.probability}%`);
+      } else {
+        set('[data-probability]', '🔒');
+      }
       document.body.dataset.auroraLevel = aurora.level;
 
       if (initial) {
