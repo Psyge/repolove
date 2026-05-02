@@ -447,6 +447,9 @@ footer a { color: var(--fg-muted); margin: 0 var(--space-sm); }
 .btn-report-floating:hover { transform: translateX(-50%) translateY(-2px); }
 .btn-report-floating:active { transform: translateX(-50%); }
 
+.kp-value {
+  text-shadow: 0 0 20px rgba(0,255,180,0.7);
+}
 /* ==========================================================
    PREMIUM — popup gating + pricing
    ========================================================== */
@@ -457,6 +460,7 @@ footer a { color: var(--fg-muted); margin: 0 var(--space-sm); }
 }
 .ap-kp-label { color:var(--fg-muted); font-size:13px; text-transform:uppercase; letter-spacing:.08em; }
 .ap-kp-value { font-family:var(--font-display); font-size:32px; font-weight:700; color:var(--accent); }
+
 
 .ap-locked { position:relative; }
 /* Teaser — ei sisällä oikeita premium-arvoja, joten visuaalinen "lock" riittää.
