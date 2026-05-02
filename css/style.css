@@ -432,17 +432,31 @@ footer a { color: var(--fg-muted); margin: 0 var(--space-sm); }
 .ap-kp-value { font-family:var(--font-display); font-size:32px; font-weight:700; color:var(--accent); }
 
 .ap-locked { position:relative; }
-.ap-locked-blur {
-  filter: blur(10px);
+/* Teaser — ei sisällä oikeita premium-arvoja, joten visuaalinen "lock" riittää.
+   Aiempi .ap-locked-blur (filter:blur) on poistettu koska se oli ohitettavissa devtoolsista. */
+.ap-locked-teaser {
   pointer-events: none;
   user-select: none;
-  opacity: .55;
+  opacity: .7;
+  padding: 8px 12px;
+  border: 1px dashed var(--border-soft);
+  border-radius: var(--radius-sm);
+  background: rgba(255,255,255,0.02);
 }
-.ap-locked-blur .ap-quick {
+.ap-locked-teaser .ap-prob {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--fg-muted);
+  text-align: center;
+  margin-bottom: 6px;
+}
+.ap-locked-teaser .ap-quick {
   display:grid; grid-template-columns:repeat(3,1fr); gap:8px;
   font-size:12px; margin-top:8px;
 }
-.ap-locked-blur .ap-quick > div { display:flex; flex-direction:column; }
+.ap-locked-teaser .ap-quick > div { display:flex; flex-direction:column; }
+.ap-locked-teaser .ap-quick strong { color: var(--fg-muted); }
 
 .ap-unlock {
   display:block; margin-top:10px; padding:12px 16px;
@@ -497,11 +511,13 @@ footer a { color: var(--fg-muted); margin: 0 var(--space-sm); }
   padding:14px 20px; font-weight:600; cursor:pointer;
   font-size:15px;
   transition: background .15s ease, border-color .15s ease;
+  display:block; text-align:center; text-decoration:none;
 }
 .buy-btn:hover { background: var(--bg-elevated); border-color:var(--accent); }
 .buy-btn.primary { background: var(--gradient-aurora); color:#0b0d12; border-color:transparent; }
 .buy-btn.primary:hover { transform: translateY(-1px); }
-.buy-btn:disabled { opacity:.6; cursor:wait; }
+.buy-btn:disabled,
+.buy-btn[aria-disabled="true"] { opacity:.6; cursor:wait; }
 
 .cta-btn {
   display:inline-block; padding:14px 28px;
