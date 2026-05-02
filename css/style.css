@@ -433,7 +433,7 @@ footer a { color: var(--fg-muted); margin: 0 var(--space-sm); }
 
 .ap-locked { position:relative; }
 .ap-locked-blur {
-  filter: blur(6px);
+  filter: blur(10px);
   pointer-events: none;
   user-select: none;
   opacity: .55;
