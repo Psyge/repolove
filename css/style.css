@@ -136,6 +136,12 @@ nav a:hover { color: var(--fg); }
   text-align: center;
   max-width: 560px; margin: var(--space-md) auto 0;
   overflow: hidden;
+   backdrop-filter: blur(12px);
+  transition: transform .2s ease, box-shadow .2s ease; 
+}
+.kp-display:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px -20px rgba(0,255,204,0.5);
 }
 .kp-display::before {
   content: ''; position: absolute; inset: -2px; border-radius: var(--radius);
@@ -195,7 +201,17 @@ section.block { padding: var(--space-xl) var(--space-md); }
   overflow: hidden;
   border: 1px solid var(--border);
 }
-.map-preview { height: 280px; cursor: pointer; position: relative; }
+.map-preview { 
+   height: 280px; 
+   cursor: pointer; 
+   position: 
+   relative; 
+   transition: transform .3s ease, box-shadow .3s ease;
+}
+.map-preview:hover {
+  transform: scale(1.02);
+  box-shadow: 0 20px 60px -20px rgba(125,95,255,0.5);
+}
 .map-preview-cta {
   position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
   background: linear-gradient(180deg, transparent 50%, rgba(7,7,13,0.85));
