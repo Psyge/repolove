@@ -1,6 +1,7 @@
 {
   "app.title": "Repotracker — Live Northern Lights Forecast",
   "app.tagline": "Real-time Northern Lights visibility for Lapland",
+  "hero.title": "See the Northern Lights<br><span class='aurora-text'>live in Lapland</span>",
   "hero.sub": "Live Kp index, solar wind speed and Bz orientation — refreshed every 5 minutes from NOAA SWPC.",
   "nav.home": "Home",
   "nav.map": "Map",
