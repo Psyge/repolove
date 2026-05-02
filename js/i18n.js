@@ -26,7 +26,7 @@
   function apply() {
     document.querySelectorAll('[data-i18n]').forEach((el) => {
       const key = el.getAttribute('data-i18n');
-      el.textContent = t(key);
+      el.innerHTML = t(key);
     });
     document.querySelectorAll('[data-i18n-attr]').forEach((el) => {
       // formaatti: "title:hero.title,placeholder:hero.search"
