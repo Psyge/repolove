@@ -212,7 +212,6 @@
 
   // ---------- Crowdsource sightings -kerros ----------
   const sightingsLayer = L.layerGroup().addTo(map);
-  const BASE = CFG.REPORT_WORKER_URL || CFG.WORKER_URL;
 
   async function refreshSightings() {
     try {
