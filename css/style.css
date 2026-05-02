@@ -591,3 +591,20 @@ footer a { color: var(--fg-muted); margin: 0 var(--space-sm); }
     transform: translateY(0);
   }
 }
+.block {
+  position: relative;
+}
+
+.block::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(0,255,204,0.05), transparent 60%);
+  opacity: 0;
+  transition: 0.4s;
+  pointer-events: none;
+}
+
+.block:hover::after {
+  opacity: 1;
+}
