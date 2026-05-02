@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="terms.pagetitle">Terms of Service — Repotracker</title>
+  <meta name="description" content="Terms of Service, Refund Policy and Seller Information for Repotracker.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=2.3.0">
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="brand">Repotracker</a>
+      <nav>
+        <a href="index.html" data-i18n="nav.home">Home</a>
+        <a href="map.html" data-i18n="nav.map">Map</a>
+        <a href="blog.html" data-i18n="nav.blog">Articles</a>
+        <a href="faq.html" data-i18n="nav.faq">FAQ</a>
+      </nav>
+      <div class="lang-switcher">
+        <button data-set-lang="en">EN</button>
+        <button data-set-lang="fi">FI</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding: var(--space-lg) var(--space-md);">
+    <section class="hero" style="padding: var(--space-lg) 0 var(--space-md);">
+      <h1 data-i18n="terms.title">Terms of Service</h1>
+      <p class="tagline" data-i18n="terms.intro">Payments, refunds, and usage terms for Repotracker.</p>
+    </section>
+
+    <section class="faq-list">
+      
+      <!-- 1. Palvelun kuvaus ja käyttö -->
+      <details class="faq-item" open>
+        <summary data-i18n="terms.q.service">1. About the Service</summary>
+        <div class="faq-body">
+          <p data-i18n="terms.a.service1">Repotracker provides space weather data, aurora forecasts, and cloud cover information. By accessing the free map or purchasing Aurora Premium, you agree to these terms.</p>
+          <p data-i18n="terms.a.service2">The data is provided for informational purposes only. Nature is unpredictable, and we cannot guarantee that you will see the aurora, even when forecasts are favorable.</p>
+        </div>
+      </details>
+
+      <!-- 2. Maksut (Kriittinen Stripelle) -->
+      <details class="faq-item">
+        <summary data-i18n="terms.q.payments">2. Payments & Aurora Premium</summary>
+        <div class="faq-body">
+          <p data-i18n="terms.a.payments1"><strong>One-time Payment:</strong> Aurora Premium access is sold as a one-time purchase (e.g., 1 day, 3 days, or 1 week). <strong>It is not a recurring subscription.</strong> You will not be charged automatically again.</p>
+          <p data-i18n="terms.a.payments2"><strong>Processing:</strong> All payments are securely processed by Stripe. Repotracker does not store or process your credit card information directly.</p>
+        </div>
+      </details>
+
+      <!-- 3. Palautusehdot (Erittäin kriittinen Stripelle) -->
+      <details class="faq-item">
+        <summary data-i18n="terms.q.refunds">3. Refund Policy</summary>
+        <div class="faq-body">
+          <p data-i18n="terms.a.refunds1"><strong>Digital Content:</strong> Due to the immediate and digital nature of Aurora Premium, all sales are final.</p>
+          <p data-i18n="terms.a.refunds2">Once a purchase is completed and the premium access is granted or the activation link is sent, <strong>we do not offer refunds</strong> for changes in weather, missed auroras, or unused access time.</p>
+          <p data-i18n="terms.a.refunds3">If you encounter a technical issue preventing you from accessing the service after purchase, please contact our support immediately.</p>
+        </div>
+      </details>
+
+      <!-- 4. Vastuunrajoitus -->
+      <details class="faq-item">
+        <summary data-i18n="terms.q.liability">4. Limitation of Liability</summary>
+        <div class="faq-body">
+          <p data-i18n="terms.a.liability">Repotracker is provided on an "as is" and "as available" basis. In no event shall we be liable for any direct, indirect, incidental, or consequential damages arising from the use of our website or data.</p>
+        </div>
+      </details>
+
+      <!-- 5. Myyjän tiedot (Kriittinen Stripelle) -->
+      <details class="faq-item">
+        <summary data-i18n="terms.q.seller">5. Seller Information</summary>
+        <div class="faq-body">
+          <p data-i18n="terms.a.seller1">Repotracker is a digital service operated by <strong>Matti Kenttä</strong>.</p>
+          <p data-i18n="terms.a.seller2"><strong>Location:</strong> Rovaniemi, Finland</p>
+          <p><strong data-i18n="terms.a.seller3">Contact Email:</strong> <span id="email-paikka-terms"></span></p>
+        </div>
+      </details>
+
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Repotracker</p>
+    <div style="margin-top:8px;">
+      <a href="privacy.html" data-i18n="footer.privacy">Privacy</a> · 
+      <a href="terms.html" data-i18n="footer.terms">Terms</a> · 
+      <a href="faq.html" data-i18n="nav.faq">FAQ</a>
+    </div>
+  </footer>
+
+  <script>
+    // Sähköpostin piilotus boteilta
+    document.addEventListener('DOMContentLoaded', () => {
+      const user = "info.repotracker";
+      const domain = "gmail.com"; // Vaihda tämä oikeaksi jos eri
+      const el = document.getElementById("email-paikka-terms");
+      if (el) el.innerHTML = '<a href="mailto:' + user + '@' + domain + '">' + user + '@' + domain + '</a>';
+    });
+  </script>
+  <script src="config.js?v=2.3.0"></script>
+  <script src="js/i18n.js?v=2.3.0"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      window.AuroraI18n.load(window.AuroraI18n.current);
+      document.querySelectorAll('[data-set-lang]').forEach(b => {
+        b.addEventListener('click', () => window.AuroraI18n.load(b.dataset.setLang));
+      });
+    });
+  </script>
+</body>
+</html>
