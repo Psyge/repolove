@@ -416,6 +416,7 @@ footer a { color: var(--fg-muted); margin: 0 var(--space-sm); }
   font-family: inherit; font-size: 14px; letter-spacing: 0.02em;
   transition: transform .15s ease, box-shadow .15s ease;
   box-shadow: 0 6px 20px -8px rgba(0,255,204,.6);
+   background: var(--gradient-aurora);
 }
 
 
