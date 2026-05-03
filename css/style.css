@@ -443,16 +443,7 @@ footer a { color: var(--fg-muted); margin: 0 var(--space-sm); }
 }
 
 /* Kelluva raportointinappi karttasivulla */
-.btn-report-floating {
-  display: block;
-  width: 100%;
-  margin: var(--space-md) 0 0;
-  padding: 14px 24px;
-  font-size: 15px;
-  box-shadow: 0 12px 36px -8px rgba(0,255,204,.5), 0 0 0 1px rgba(0,255,204,.3);
-}
-.btn-report-floating:hover { transform: translateX(-50%) translateY(-2px); }
-.btn-report-floating:active { transform: translateX(-50%); }
+
 
 .kp-value {
   text-shadow: 0 0 20px rgba(0,255,180,0.7);
