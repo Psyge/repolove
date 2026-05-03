@@ -176,5 +176,12 @@
   "terms.a.seller1": "Repotracker is a digital service operated by <strong>Matti Kenttä</strong>.",
   "terms.a.seller2": "<strong>Location:</strong> Rovaniemi, Finland",
   "terms.a.seller3": "Contact Email:",
-  "footer.terms": "Terms"
+  "footer.terms": "Terms",
+  "forecast.title": "3-day aurora forecast",
+  "forecast.today": "Today",
+  "forecast.tomorrow": "Tomorrow",
+  "forecast.dayafter": "Day after",
+  "forecast.unlock": "Unlock full 3-day forecast",
+  "forecast.full": "Full 3-day forecast",
+  "forecast.empty": "Forecast unavailable."
 }
