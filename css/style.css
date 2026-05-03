@@ -119,6 +119,7 @@ nav a:hover { color: var(--fg); }
   inset: 0;
   background: radial-gradient(circle at 50% 0%, rgba(0,255,180,0.08), transparent 60%);
   animation: auroraMove 8s ease-in-out infinite alternate;
+  pointer-events: none; 
 }
 .hero-split::before,
  {
