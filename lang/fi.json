@@ -177,5 +177,12 @@
   "terms.a.seller1": "Repotracker on digitaalinen palvelu, jota ylläpitää <strong>Matti Kenttä</strong>.",
   "terms.a.seller2": "<strong>Sijainti:</strong> Rovaniemi, Suomi",
   "terms.a.seller3": "Yhteyssähköposti:",
-  "footer.terms": "Käyttöehdot"
+  "footer.terms": "Käyttöehdot",
+  "forecast.title": "Revontuliennuste 3 vrk",
+  "forecast.today": "Tänään",
+  "forecast.tomorrow": "Huomenna",
+  "forecast.dayafter": "Ylihuomenna",
+  "forecast.unlock": "Avaa täysi 3 päivän ennuste",
+  "forecast.full": "Koko 3 päivän ennuste",
+  "forecast.empty": "Ennustetta ei saatavilla."
 }
