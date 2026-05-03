@@ -142,6 +142,11 @@
 
   async function openAuroraPopup(lat, lon, name) {
     const placeName = name || `${lat.toFixed(2)}, ${lon.toFixed(2)}`;
+    // Update 3-day forecast for the clicked location
+    if (window.AuroraForecast) {
+      const fc = document.getElementById('forecast-container');
+      if (fc) window.AuroraForecast.render(fc, { lat, lon, compact: false });
+    }
     const loading = L.popup({ maxWidth: 320 })
       .setLatLng([lat, lon])
       .setContent(`<div class="aurora-popup"><div class="ap-name">${placeName}</div><div class="ap-loading">${window.AuroraI18n.t('loading','Loading…')}</div></div>`)
@@ -245,4 +250,14 @@
   refreshSightings();
   setInterval(refreshSightings, 2 * 60 * 1000);
   window.__refreshSightings = refreshSightings;
+
+  // Initial 3-day forecast render (default: Rovaniemi area, unless URL gave coords)
+  if (window.AuroraForecast) {
+    const fc = document.getElementById('forecast-container');
+    if (fc) {
+      const initLat = lat ? parseFloat(lat) : 66.5;
+      const initLon = lon ? parseFloat(lon) : 25.7;
+      window.AuroraForecast.render(fc, { lat: initLat, lon: initLon, compact: false });
+    }
+  }
 })();
