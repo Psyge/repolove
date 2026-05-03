@@ -121,7 +121,7 @@ nav a:hover { color: var(--fg); }
   animation: auroraMove 8s ease-in-out infinite alternate;
   pointer-events: none; 
 }
-.hero-split::before,
+.hero-split::before
  {
   pointer-events: none;
 }
