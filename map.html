@@ -30,7 +30,7 @@
     </div>
   </header>
 
-  <main class="container" style="padding: var(--space-md);">
+ <main class="container" style="padding: var(--space-md);">
     <div class="section-head">
       <div>
         <h2 data-i18n="map.title">Live Aurora Map</h2>
@@ -45,7 +45,13 @@
 
     <!-- Kelluva raportointinappi -->
     <button id="report-sighting-btn" class="btn-primary btn-report btn-report-floating" data-i18n="sightings.report_btn">I see auroras now</button>
+
+    <!-- 3 päivän ennuste -->
+    <section id="forecast" style="margin-top: var(--space-lg);">
+      <div id="forecast-container"></div>
+    </section>
   </main>
+
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="config.js?v=2.5.0"></script>
@@ -57,6 +63,8 @@
   <script src="js/aurora-engine.js?v=2.5.0"></script>
   <script src="js/aurora-overlay.js?v=2.5.0"></script>
   <script src="js/sightings.js?v=2.5.2"></script>
-  <script src="js/map-page.js?v=2.6.1"></script>
+  <script src="js/forecast-widget.js?v=2.7.0"></script>
+  <script src="js/map-page.js?v=2.7.0"></script>
 </body>
 </html>
+
