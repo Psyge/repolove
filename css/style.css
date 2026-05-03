@@ -18,7 +18,7 @@
   --radius-sm:    8px;
   --space-xs: 4px; --space-sm: 8px; --space-md: 16px;
   --space-lg: 24px; --space-xl: 48px; --space-2xl: 80px;
-  --gradient-aurora: linear-gradient(135deg, #00ffcc 0%, #27B298 60%, #58B227 100%);
+  --gradient-aurora: linear-gradient(135deg, #7DF5DB 0%, #27B298 60%, #58B227 100%);
   --shadow-glow:  0 10px 40px -10px rgba(0,255,204,0.35);
   --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-body:    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
